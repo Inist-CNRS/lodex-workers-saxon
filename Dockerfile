@@ -20,7 +20,6 @@ ENV SAXON_HOME=/usr/share/java/saxon
 COPY --from=saxon /he /
 COPY --from=build /app /app
 WORKDIR /app
-COPY config.json crontab.js generate-dotenv.js gitsync gitsyncdir chmod-all chmod-one docker-entrypoint.sh public /app/
 # To be compilant with
 # - Debian/Ubuntu container (and so with ezmaster-webdav)
 # - ezmaster see https://github.com/Inist-CNRS/ezmaster

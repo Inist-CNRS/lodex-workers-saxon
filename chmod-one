@@ -1,0 +1,8 @@
+#!/bin/sh
+TARGET=${1:?the first argument of the command should be an octal-mode.}
+FILE=${2:?the second argument of the command should be an file.}
+SOURCE=`stat -c "%a" $FILE`
+if [ "$SOURCE" != "$TARGET" ]; then
+	echo "Restore permissions for $FILE"
+    chmod $TARGET $FILE
+fi
