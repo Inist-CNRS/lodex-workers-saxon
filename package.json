@@ -23,6 +23,7 @@
 		"@ezs/basics": "1.9.0",
 		"@ezs/core": "1.22.0",
 		"@ezs/local": "file:./local",
+		"@ezs/loterre": "1.1.0",
 		"@ezs/storage": "1.4.0",
 		"concurrently": "5.3.0",
 		"dotenv-cli": "4.0.0",
