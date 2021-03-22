@@ -1,6 +1,6 @@
 {
 	"name": "lodex-workers-saxon",
-	"version": "1.2.6",
+	"version": "1.0.0",
 	"description": "saxon script for Lodex",
 	"directories": {
 		"test": "test"
