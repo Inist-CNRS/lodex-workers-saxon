@@ -1,0 +1,19 @@
+# Ignore all files by default
+*
+
+# White list only the required files
+!config.json
+!crontab.js
+docker-compose.debug.yml
+!docker-entrypoint.sh*
+Dockerfile
+!generate-dotenv.js*
+!gitsync*
+!gitsyncdir*
+!chmod-all
+!chmod-one
+!local/
+local/node_modules/
+!package.json
+!public/
+!router/
