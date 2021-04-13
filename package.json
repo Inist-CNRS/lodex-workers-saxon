@@ -1,7 +1,7 @@
 {
 	"name": "lodex-workers-saxon",
 	"version": "1.1.0",
-	"description": "saxon script for Lodex",
+	"description": "saxon scripts for Lodex",
 	"directories": {
 		"test": "test"
 	},
@@ -20,15 +20,15 @@
 	},
 	"homepage": "https://github.com/Inist-CNRS/lodex-workers-saxon#readme",
 	"dependencies": {
-		"@ezs/basics": "1.9.0",
-		"@ezs/core": "1.22.0",
+		"@ezs/analytics": "1.13.0",
+		"@ezs/basics": "1.11.1",
+		"@ezs/core": "1.23.3",
 		"@ezs/local": "file:./local",
-		"@ezs/loterre": "1.1.0",
-		"@ezs/storage": "1.4.0",
-		"concurrently": "5.3.0",
+		"@ezs/storage": "1.4.1",
+		"concurrently": "6.0.2",
 		"dotenv-cli": "4.0.0",
 		"node-schedule": "1.3.2",
-		"npm-watch": "0.7.0",
+		"npm-watch": "0.9.0",
 		"shelljs": "0.8.4"
 	},
 	"watch": {
@@ -48,12 +48,13 @@
 	},
 	"scripts": {
 		"prestart": "node ./generate-dotenv.js",
-		"start": "concurrently \"npm:daemon\" \"npm:crontab\"",
-		"daemon": "cd ./public && dotenv -- ezs --daemon ./",
+		"start": "concurrently --no-color --prefix \"{time}-{name}\" \"npm:daemon\" \"npm:crontab\"",
+		"daemon": "cd ./public && dotenv -e ../.env -- ezs --daemon ./",
 		"crontab": "dotenv -- node ./crontab.js",
-		"insertversion:readme": "sed -i \"s#\\(lodex-workers-saxon:\\)\\([\\.a-z0-9]\\+\\)#\\1${npm_package_version}#g\" README.md",
-		"insertversion:makefile": "sed -i \"s#\\(lodex-workers-saxon:\\)\\([\\.a-z0-9]\\+\\)#\\1${npm_package_version}#g\" Makefile",
-		"insertversion:docker": "sed -i \"s#\\(lodex-workers-saxon:\\)\\([\\.a-z0-9]\\+\\)#\\1${npm_package_version}#g\" docker-compose*.yml",
+		"watcher": "concurrently --no-color --prefix \"{time}-{name}\" \"npm:watch\"",
+		"insertversion:readme": "sed -i \"s#\\(lodex-workers-python:\\)\\([\\.a-z0-9]\\+\\)#\\1${npm_package_version}#g\" README.md",
+		"insertversion:makefile": "sed -i \"s#\\(lodex-workers-python:\\)\\([\\.a-z0-9]\\+\\)#\\1${npm_package_version}#g\" Makefile",
+		"insertversion:docker": "sed -i \"s#\\(lodex-workers-python:\\)\\([\\.a-z0-9]\\+\\)#\\1${npm_package_version}#g\" docker-compose*.yml",
 		"version": "npm run insertversion:readme && npm run insertversion:makefile && npm run insertversion:docker && git add README.md Makefile docker-compose.debug.yml",
 		"postversion": "git push && git push --tags",
 		"watch": "npm-watch",
