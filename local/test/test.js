@@ -1,3 +1,4 @@
+import fs from 'fs';
 import ezs from '@ezs/core';
 import statements from '../src';
 
@@ -54,5 +55,28 @@ describe('saxon', () => {
             });
         stream.write(input);
         stream.end();
+    });
+});
+describe('fop', () => {
+    test('fop simple.fo', (done) => {
+        ezs.use(statements);
+        const output = [];
+        const script = `
+
+            [fop]
+
+        `;
+        const stream = fs.createReadStream(`${__dirname}/simple.fo`);
+        stream
+            .pipe(ezs('delegate', { script }))
+            .pipe(ezs.catch())
+            .on('error', done)
+            .on('data', (chunk) => {
+                output.push(chunk);
+            })
+            .on('end', () => {
+                expect(output.join('')).toMatch(/^%PDF/);
+                done();
+            });
     });
 });
